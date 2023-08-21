@@ -3,10 +3,10 @@
 Selamat datang mahasiswa! Dalam tugas ini, Anda diminta untuk membuat dokumentasi menggunakan OpenAPI. Anda akan membuat dokumentasi untuk sebuah API dengan salah satu tema berikut: edukasi, perpustakaan, atau transaksi finansial.
 
 ## Instruksi
-
-1. Pilih salah satu tema: edukasi, perpustakaan, atau transaksi finansial.
-2. Buatlah dokumentasi OpenAPI yang mencakup setidaknya **8 endpoint**.
-3. Untuk setiap endpoint, sertakan informasi berikut:
+1. Clone repository ini dan buatlah branch baru 
+2. Pilih salah satu tema: edukasi, perpustakaan, atau transaksi finansial.
+3. Buatlah dokumentasi OpenAPI yang mencakup setidaknya **8 endpoint**.
+4. Untuk setiap endpoint, sertakan informasi berikut:
    - Metode HTTP (GET, POST, PUT, DELETE, dll.)
    - Ringkasan operasi
    - Deskripsi (opsional, namun disarankan)
@@ -48,4 +48,4 @@ Selamat datang mahasiswa! Dalam tugas ini, Anda diminta untuk membuat dokumentas
 
 ## Pengumpulan
 
-Setelah Anda menyelesaikan dokumentasi OpenAPI, push pekerjaan anda pada repository ini menggunakan branch baru, dan buatlah pull request dengan target branch master
+Setelah Anda menyelesaikan dokumentasi OpenAPI, push pekerjaan anda pada repository ini menggunakan branch baru, dan buatlah pull request dengan target branch main
