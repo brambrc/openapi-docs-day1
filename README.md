@@ -1,6 +1,6 @@
 # Tugas Dokumentasi OpenAPI
 
-Selamat datang mahasiswa! Dalam tugas ini, Anda diminta untuk membuat dokumentasi menggunakan OpenAPI. Anda akan membuat dokumentasi untuk sebuah API dengan salah satu tema berikut: edukasi, perpustakaan, atau transaksi finansial.
+Selamat datang teman - teman! Dalam tugas ini, Anda diminta untuk membuat dokumentasi menggunakan OpenAPI. Anda akan membuat dokumentasi untuk sebuah API dengan salah satu tema berikut: edukasi, perpustakaan, atau transaksi finansial.
 
 ## Instruksi
 1. Clone repository ini dan buatlah branch baru 
