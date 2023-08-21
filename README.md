@@ -49,3 +49,7 @@ Selamat datang mahasiswa! Dalam tugas ini, Anda diminta untuk membuat dokumentas
 ## Pengumpulan
 
 Setelah Anda menyelesaikan dokumentasi OpenAPI, push pekerjaan anda pada repository ini menggunakan branch baru, dan buatlah pull request dengan target branch main
+
+## Deadline
+
+Selasa 22 Agustus 2023 pukul 15:00 WIB
