@@ -1,0 +1,93 @@
+openapi: 3.0.0
+info:
+  version: 1.2.0
+  title: API Keuangan
+  description: API sederhana untuk mengelola keuangan
+  termsOfService: 'http://example.com/terms/'
+  contact: 
+    name: Anggiet Bracmatya
+    url: 'https://bracmatya.id/'
+    email: anggiet.bracmatya@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+servers:
+  - url: 'http://localhost:3000/v1'
+
+
+paths:
+  /get-saldo:
+    get:
+      summary: dapatkan informasi saldo user
+      responses: 
+        '200':
+          description: Sukses mendapatkan informasi saldo
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetSaldo'
+
+  /get-user:
+    get:
+      summary: dapatkan informasi user
+      responses: 
+        '200':
+          description: Sukses mendapatkan informasi user
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetUser'
+
+components:
+  schemas:
+    GetSaldo:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: id user
+          example: 1
+        nama:
+          type: string
+          description: nama user
+          example: Anggiet Bracmatya
+        saldo:
+          type: integer
+          description: saldo user
+          example: 1000000
+        created_at:
+          type: string
+          description: waktu pembuatan data
+          example: 2021-10-10 10:10:10
+        updated_at:
+          type: string
+          description: waktu pembuatan data
+          example: 2021-10-10 10:10:10
+
+    GetUser:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: id user
+          example: 1
+        nama:
+          type: string
+          description: nama user
+          example: Anggiet Bracmatya
+        tanggal_lahir:
+          type: string
+          description: tanggal lahir user
+          example: 2021-10-10
+        created_at:
+          type: string
+          description: waktu pembuatan data
+          example: 2021-10-10 10:10:10
+        updated_at:
+          type: string
+          description: waktu pembuatan data
+          example: 2021-10-10 10:10:10
