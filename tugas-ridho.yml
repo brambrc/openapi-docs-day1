@@ -1,0 +1,246 @@
+openapi: '3.0.2'
+info:
+  title: API Edukasi
+  version: '1.0'
+  description: Tugas membuat dokumentasi sederhana
+  termsOfService: 'https://dummydumber.com/terms/'
+  contact:
+    name: Anggawan Ridho
+    url: 'https://wefoundcode.com'
+    email: 'admin@wefoundcode.com'
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+servers:
+  - url: https://localhost:3000/v1
+
+paths:
+  /books:
+    get:
+      summary: Melihat semua buku yang tersedia
+      responses:
+        '200':
+          description: Sukses mendapatkan informasi daftar buku
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/Book'
+                  
+    post:
+      summary: Menambahkan buku baru
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/schemas/Book'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: 'Berhasil menambahkan buku'
+
+
+  /books/{bookId}:
+    get:
+      summary: Mendapatkan detail buku
+      parameters:
+        - name: bookId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID buku
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: 
+              example: 
+                id: 1
+                title: 'Book Title'
+                author: 'Author Name'
+
+    put:
+      summary: Mengganti detail buku
+      parameters:
+        - name: bookId
+          in: path
+          required: true
+          schema: 
+            type: integer
+          description: ID buku
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: 
+              $ref: '#components/schemas/Book'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                message: "Buku berhasil dirubah"
+
+
+  /books/{bookId}/borrow:
+    post:
+      summary: Peminjaman buku
+      parameters:
+        - name: bookId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID buku
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BorrowRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                message: "Buku berhasil dipinjam"
+
+
+  /books/{bookId}/return:
+    post:
+      summary: Pengembalian buku
+      parameters:
+        - name: bookId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID buku
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReturnRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                message: "Buku berhasil dikembalikan"
+
+
+  /books/search:
+    get:
+      summary: Search for books
+      parameters:
+        - name: keyword
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Keyword for book search
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  title: "Judul buku 1"
+                - id: 2
+                  title: "Judul buku 2"
+  
+
+  /members:
+    get:
+      summary: Melihat daftar member
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  name: "Nama Member 1"
+                - id: 2
+                  name: "Nama Member 2"
+
+        
+  /members/{memberId}/history:
+    get:
+      summary: Melihat histori pemimjaman seorang member
+      parameters:
+        - name: memberId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID member
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - bookId: 1
+                  title: "Judul Buku 1"
+                  borrowDate: "2023-08-17"
+                - bookId: 2
+                  title: "Judul Buku 2"
+                  borrowDate: "2023-08-21"
+
+
+  /books/recommendations:
+    get:
+      summary: Melihat rekomendasi buku-buku
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                - id: 1
+                  title: "Rekomendasi Buku 1"
+                - id: 2
+                  title: "Rekomendasi Buku 2"
+
+
+components:
+  schemas:
+    Book:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        author:
+          type: string
+
+    BorrowRequest:
+      type: object
+      properties:
+        memberId:
+          type: integer
+
+    ReturnRequest:
+      type: object
+      properties:
+        memberId:
+          type: integer
+        dueDate:
+          type: string
