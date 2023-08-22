@@ -1,0 +1,466 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Tugas API - Edukasi",
+    "version": "1.0",
+    "contact": {
+      "name": "Irfan Setiawan",
+      "email": "fann.fann771@gmail.com",
+      "url": "https://facebook.com/Fannn03"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api/v1",
+      "description": "Endpoint"
+    }
+  ],
+  "paths": {
+    "/class": {
+      "get": {
+        "tags": [
+          "Class"
+        ],
+        "summary": "Get all list class",
+        "description": "Get all list class University of Toktok",
+        "responses": {
+          "200": {
+            "description": "Success get all class list",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "success": {
+                    "description": "Example success get all class list",
+                    "value": {
+                      "result": "success",
+                      "message": "Successfully get list class",
+                      "data": [
+                        {
+                          "id": 1,
+                          "subject": "Programming",
+                          "duration": "12 weeks long",
+                          "time_commitment": "6 - 9 hours per week",
+                          "topics": [
+                            "video games",
+                            "game development",
+                            "programming"
+                          ]
+                        },
+                        {
+                          "id": 2,
+                          "subject": "Health & Medicine",
+                          "duration": "1 week long",
+                          "time_commitment": "3 - 5 hours per week",
+                          "topics": [
+                            "health",
+                            "diseases",
+                            "public health",
+                            "history"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/class/{subject}": {
+      "get": {
+        "tags": [
+          "Class"
+        ],
+        "description": "Get details subject class",
+        "summary": "Get details class",
+        "responses": {
+          "200": {
+            "description": "Successfully get details subject class",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "success": {
+                    "description": "Example success get details subject class",
+                    "value": {
+                      "result": "success",
+                      "message": "Successfully get subject class",
+                      "data": {
+                        "id": 2,
+                        "subject": "Health & Medicine",
+                        "duration": "1 week long",
+                        "time_commitment": "3 - 5 hours per week",
+                        "topics": [
+                          "health",
+                          "diseases",
+                          "public health",
+                          "history"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Subject class is not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "error": {
+                    "description": "Example response when subject class is not found",
+                    "value": {
+                      "result": "error",
+                      "message": "Subject class is not found",
+                      "data": null
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/class/{subject}/announcement": {
+      "get": {
+        "description": "Important announcement of subject class",
+        "summary": "Get announcement class",
+        "tags": ["Class"],
+        "responses": {
+          "200": {
+            "description": "Example success announcement class",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "success": {
+                    "description": "Example response announcement of class",
+                    "value": {
+                      "result": "success",
+                      "message": "Successfully get data",
+                      "data": {
+                        "id": 1,
+                        "subject": "Programming",
+                        "message": "Exam test",
+                        "datetime": 32321122
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Example error announcement class",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "error": {
+                    "description": "Example error response announcement class",
+                    "value": {
+                      "result": "error",
+                      "message": "Couldn't get announcement class data",
+                      "data": null
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/class/create": {
+      "post": {
+        "tags": [
+          "Class"
+        ],
+        "summary": "Create new subject class",
+        "description": "Create new subject class",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/createSubject"
+              },
+              "examples": {
+                "javascript": {
+                  "description": "Example request javascript",
+                  "value": {
+                    "subject": "Programming",
+                    "duration": "1 week long",
+                    "time_commitment": "3 - 5 hours per week",
+                    "topics": [
+                      "programming",
+                      "game development"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully created new subject",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "success": {
+                    "description": "Example successfully created new subject",
+                    "value": {
+                      "result": "success",
+                      "message": "Successfully created new record"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Failed create new subject",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "error": {
+                    "description": "Example failed created new subject",
+                    "value": {
+                      "result": "error",
+                      "message": {
+                        "subject": "Subject field has been taken",
+                        "duration": "Duration field cannot be null"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/students": {
+      "get": {
+        "description": "List student University of Toktok",
+        "tags": ["Student"],
+        "summary": "Get all list students",
+        "responses": {
+          "200": {
+            "description": "Example get all list students",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "success": {
+                    "description": "Example response get all list students",
+                    "value": {
+                      "result": "sucess",
+                      "message": "Sucessfully get data students",
+                      "data": [
+                        {
+                          "id": 1,
+                          "nim": "3427582713",
+                          "name": "John Wick",
+                          "email": "johnwick321@fakemail.com"
+                        },
+                        {
+                          "id": 2,
+                          "nim": "27582648123",
+                          "name": "Elon Musk",
+                          "email": "elonmusk292@fakemail.com"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/students/{nim}/score": {
+      "get": {
+        "tags": ["Student"],
+        "description": "Get all list score students",
+        "summary": "Get score students",
+        "responses": {
+          "200": {
+            "description": "Example when score student is found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "success": {
+                    "description": "Example response score students",
+                    "value": {
+                      "result": "success",
+                      "message": "Successfully get score students",
+                      "data": {
+                        "id": 1,
+                        "nim": "3427582713",
+                        "name": "John Wick",
+                        "email": "johnwick321@fakemail.com",
+                        "scores": [
+                          {
+                            "id": 1,
+                            "name": "Game Development",
+                            "score": 86
+                          },
+                          {
+                            "id": 2,
+                            "name": "Programming",
+                            "score": 88
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Example when score student not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "error": {
+                    "description": "Example response score students",
+                    "value": {
+                      "result": "error",
+                      "message": "Student not found",
+                      "data": null
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/schedule": {
+      "get": {
+        "tags": ["Lesson"],
+        "summary": "Get all list lesson",
+        "description": "Get all list lesson schedule",
+        "responses": {
+          "200": {
+            "description": "Success get all schedule",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "success": {
+                    "description": "Example success get all schedule",
+                    "value": {
+                      "result": "success",
+                      "message": "Successfully get list schedule",
+                      "data": [
+                        {
+                          "id": 1,
+                          "major": "Programming",
+                          "subject": [
+                            "Programming language theory",
+                            "Computer graphics",
+                            "Human computer interaction"
+                          ]
+                        },
+                        {
+                          "id": 2,
+                          "major": "Programming",
+                          "subject": [
+                            "Biophysics",
+                            "Chemical biology",
+                            "Virology",
+                            "Neuroscience"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/schedule/{subjectName}": {
+      "get": {
+        "description": "Get Subject Matter",
+        "summary": "Get list Subject Matter",
+        "tags": ["Lesson"],
+        "responses": {
+          "200": {
+            "description": "Successfully get subject matter data",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "success": {
+                    "description": "Example response subject matter",
+                    "value": {
+                      "result": "success",
+                      "message": "Successfully get data",
+                      "data": {
+                        "id": 1,
+                        "subjectName": "Database",
+                        "subjectMatter": [
+                          "Introduction Database",
+                          "Query Database",
+                          "Relationship Diagram"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Failed to get subject matter",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "success": {
+                    "description": "Example response failed get subject matter",
+                    "value": {
+                      "result": "error",
+                      "message": "Failed to get subject matter data",
+                      "data": null
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "createSubject": {
+        "type": "object",
+        "properties": {
+          "subject": {
+            "type": "string"
+          },
+          "duration": {
+            "type": "string"
+          },
+          "time_commitment": {
+            "type": "string"
+          },
+          "topics": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}
