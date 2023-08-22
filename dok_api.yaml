@@ -1,0 +1,205 @@
+Openapi: 3.0.0
+info:
+  title: Library API
+  version: 1.0.2
+  description: API pelayanan Perpustakaan
+  termsOfService: 'http://example.com/terms/'
+  contact: 
+    name: Aris Nurdiyanto
+    url: 'https://Nurdiyanto.id/'
+    email: ardiyan41215@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+servers:
+  - url: 'http://localhost:3000/v1'
+
+
+paths:
+  /get-books:
+    get:
+      summary: Daftar buku yang tersedia
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: Array
+                items:
+                  $ref: '#/components/schemas/Getbooks'
+
+  /get-booksId:
+    get:
+      summary: Detail buku
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: integer
+                items:
+                  $ref: '#/components/shcemas/GetbooksId'
+
+  /put-borrow:
+    put:
+      summary: Peminjaman buku
+      responses:
+        '200':
+          description: buku berhasil dipinjam
+          content:
+            application/json:
+              schema:
+                type: integer
+                items:
+                  $ref: '#/components/shcemas/Putborrow'
+
+  /put-return:
+    put:
+      summary: Pengembalian buku
+      responses:
+        '200':
+          description: pengembalian buku berhasil
+          content:
+            application/json:
+              schema:
+                type: integer
+                items:
+                  $ref: '#/components/shcemas/Putreturn'
+
+  /get-search:
+    get:
+      summary: Pencarian buku
+      responses:
+        '200':
+          description: done
+          content:
+            application/json:
+              schema:
+                type: string
+                items:
+                  $ref: '#/componens/shcemas/Getsearch'
+              
+  /get-members:
+    get:
+      summary: Daftar anggota perpustakaan
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: 
+                type: string
+                items:
+                  $ref: '#/componens/schemas/Getmembers'
+
+  /get-history:
+    get:
+      summary: Riwayat peminjaman
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+               type: string
+               items:
+                $ref: '#/componens/schemas/Gethistory'
+              
+  /recommendations:
+    get:
+      summary: Rekomendasi buku
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                items:
+                  $ref: '#/componens/schemas/Getrecomendation'
+  
+
+components:
+  schemas:
+    Getbooks:
+      type: object
+      properties:
+       id:
+        type: integer
+        description: bookId
+        example:
+          - title: "Judul Buku"
+            author: "Penulis"
+
+    GetbooksId:
+      type: object
+      parameters:
+        name: bookId
+        in: path
+        required: true
+        example:
+          title: "Judul Buku"
+          author: "Penulis"
+          year: 2023
+
+    Putborrow:
+      type: object
+      parameters:
+        name: bookId
+        in: path
+        required: true   
+        example:
+          message: "Buku berhasil dipinjam"
+
+    Putreturn:
+      type: object
+      parameters:
+        name: bookId
+        in: path
+        required: true     
+        example:
+          message: "Buku berhasil dikembalikan"
+
+    Getsearch:
+      type: object 
+      parameters:
+        name: query
+        in: query
+        required: true
+        example:
+          title: "Judul Buku"
+          author: "Penulis"
+
+    Getmembers:
+      type: string
+      properties:
+        id: 
+          type: integer
+          description: userId
+          example: 321
+        Nama:
+          type: string
+          description: nameUser
+          example: aris
+
+    Gethistory:
+      type: string
+      properties:
+        book:
+          title: string
+          borrower: string
+          example:
+            book: "Judul Buku"
+            borrower: "Nama Anggota"
+
+    Getrecomendation:
+      type: object
+      properties:
+        bookId:
+          title: string
+          outhor: string
+          example:
+            title: "Judul Buku Rekomendasi"
+            author: "Penulis Rekomendasi"
