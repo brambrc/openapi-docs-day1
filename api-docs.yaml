@@ -1,0 +1,139 @@
+openapi: 3.0.0
+info:
+  title: Dokumentasi API Edukasi Sederhana
+  version: 1.0.0
+  termsOfService: 'http://exampleEducation.com/terms/'
+  contact: 
+    name: Ruben Filemon
+    url: 'https://rfs.id/'
+    email: rubenfilemon@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+servers:
+  - url: 'http://localhost:3000/v1'
+
+
+
+paths:
+  /api/courses:
+    get:
+      summary: Mengambil daftar semua mata kuliah
+      responses:
+        '200':
+          description: OK
+  /api/courses/{course_id}:
+    get:
+      summary: Mengambil detail mata kuliah berdasarkan ID
+      parameters:
+        - name: course_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Mata kuliah tidak ditemukan
+  /api/courses/{course_id}/enroll:
+    post:
+      summary: Mendaftarkan peserta didik ke mata kuliah
+      parameters:
+        - name: course_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnrollInput'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+        '404':
+          description: Mata kuliah tidak ditemukan
+  /api/courses/{course_id}/participants:
+    get:
+      summary: Mengambil daftar peserta didik dalam mata kuliah
+      parameters:
+        - name: course_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Mata kuliah tidak ditemukan
+  /api/courses/{course_id}/grades:
+    get:
+      summary: Mengambil nilai peserta didik dalam mata kuliah
+      parameters:
+        - name: course_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Mata kuliah tidak ditemukan
+  /api/courses/{course_id}/announcements:
+    get:
+      summary: Mengambil pengumuman kelas dalam mata kuliah
+      parameters:
+        - name: course_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Mata kuliah tidak ditemukan
+  /api/courses/{course_id}/schedule:
+    get:
+      summary: Mengambil jadwal pelajaran dalam mata kuliah
+      parameters:
+        - name: course_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Mata kuliah tidak ditemukan
+  /api/courses/{course_id}/materials:
+    get:
+      summary: Mengambil materi pelajaran dalam mata kuliah
+      parameters:
+        - name: course_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Mata kuliah tidak ditemukan
+components:
+  schemas:
+    EnrollInput:
+      type: object
+      properties:
+        student_id:
+          type: integer
+      required:
+        - student_id
